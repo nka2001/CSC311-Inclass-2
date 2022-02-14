@@ -1,6 +1,10 @@
 //this inclass shows how to access a database using java, the database comes from Access
 package com.mycompany.inclass2;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +16,18 @@ import java.util.logging.Logger;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+
+        GsonBuilder builder = new GsonBuilder();//creates the GSON
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+
+        FileReader fr = new FileReader("emp.json");//opens the json file
+        Employee e2 = gson.fromJson(fr, Employee.class);//this will take the json from the file reader and create an employee class instance 
+        
+        System.out.println(e2.toString());//prints it out 
+
+        /*
         String databaseURL = "";
         Connection c = null;
 
@@ -61,7 +76,7 @@ public class Main {
             System.out.println("error adding");
             
         }
-
+         */
     }
 
 }
